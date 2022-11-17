@@ -1,5 +1,5 @@
 // usa as conexões do workbench
-const connection = require('./conecction');
+const connection = require('./connection');
 
 const getProducts = async () => {
   const [result] = await connection.execute('SELECT * FROM products;');
