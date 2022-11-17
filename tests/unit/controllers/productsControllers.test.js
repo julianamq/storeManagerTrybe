@@ -20,13 +20,12 @@ describe('Products search test', function () {
     const request = { body: {} };
     response.status = sinon.stub().returns(response);
     response.json = sinon.stub().returns();
+    sinon.stub(connection, 'execute').resolves();
     sinon.stub(mockProducts).resolves();
     expect(response.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(getProductById.message);
 
   });
-  it('Se a função getProducts está buscando os produtos', async function () {
 
-});
 });
 
