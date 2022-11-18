@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const connection = require('../../../src/models/connection');
 const { mockProducts } = require('../mocks/productsServices.mock');
-const productsServices = require('./../../../src/services/productsServices')
+const productsService = require('./../../../src/services/productsServices')
 const productsModels = require('./../../../src/models/products.model')
 
 // arranjar(mocks, variaveis),agir, aferir (expect) 

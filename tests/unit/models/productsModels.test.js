@@ -14,30 +14,23 @@ describe('Products search test', function () {
   beforeEach(() => {
     sinon.restore();
   });
-  const STATUS_OK = 200;
-  const HTTP_404 = 404;
+
   it('Busca de produtos', async function () {
     sinon.stub(connection, 'execute').resolves([[mockProducts]]);
 
     const buscaProduto = await productsModel.getProducts();
 
-    expect(buscaProduto).to.equal(mockProducts);
+    expect(buscaProduto).to.be.deep.equal(mockProducts);
    
-  });
-  it('Chamando todos os produtos.', async function () {
-    sinon.stub(productsModel, 'getProducts').resolves(mockProducts);
-
-    const result = await productsModel.getProducts();
-    console.log(result)
-   
-    expect(result).to.be.deep.equal(mockProducts);
   });
   it('Chamando por id.', async function () {
+    const product = { id: 1, name: 'Test' };
+    sinon.stub(connection, 'execute').resolves([mockProducts]);
     sinon.stub(productsModel, 'getProductById').resolves(mockProducts);
 
-    const result = await productsModel.getProductById(22);
-
-    expect(result).to.be.deep.equal(mockProducts);
+    const result = await productsModel.getProductById(product);
+console.log(result, 'log')
+    expect(result).to.been.have.calledWith(200);
   });
   // afterEach(sinon.restore);
 });
