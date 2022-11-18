@@ -14,6 +14,10 @@ const getProductById = async (id) => {
   return result;
 };
 
+// const productsRouter = async () => {
+  
+// };
+
 module.exports = {
   getProducts,
   getProductById,
