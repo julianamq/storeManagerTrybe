@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const connection = require('../../../src/models/connection');
 const { mockProducts } = require('../mocks/productsServices.mock');
-
+const productsService = require('./../../../src/services/productsServices')
 const productsModel = require('./../../../src/models/products.model')
 
 // arranjar(mocks, variaveis),agir, aferir (expect) 
@@ -28,7 +28,7 @@ describe('Products search test', function () {
     sinon.stub(connection, 'execute').resolves([mockProducts]);
     sinon.stub(productsModel, 'getProductById').resolves(mockProducts);
 
-    const result = await productsModel.getProductById(product);
+    const result = await productsService.getProductById(product);
 console.log(result, 'log')
     expect(result).to.been.have.calledWith(200);
   });

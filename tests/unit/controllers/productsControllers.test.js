@@ -4,6 +4,7 @@ const sinonChai = require('sinon-chai');
 const { mockProducts, mockIdProducts } = require('../mocks/productsServices.mock');
 const productsController = require('../../../src/controllers/products.controllers');
 const productsService = require('../../../src/services/productsServices');
+const productsModel = require('./../../../src/models/products.model')
 
 // arranjar(mocks, variaveis),agir, aferir (expect) 
 const { expect } = chai;
