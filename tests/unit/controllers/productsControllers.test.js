@@ -43,7 +43,7 @@ describe('Controller test', function () {
     await productsController.getProductById(request, response);
    
     expect(response.status).to.have.been.calledWith(404);
-    expect(response.json).to.have.been.calledWith(mockProducts);
+    expect(response.json).to.have.been.calledWith(mock404);
   });
   it('Chamando todos os produtos.', async function () {
     sinon.stub(productsModel, 'getProducts').resolves(mockProducts);
@@ -55,17 +55,20 @@ describe('Controller test', function () {
   it('Chamando por id mensagem 200', async function () {
     const response = {};
     const request = { params: { id: '22' } };
+    const produto = {
+      "id": 1,
+      "name": "Martelo de Thor"
+    }
     
-
     response.status = sinon.stub().returns(response);
     response.json = sinon.stub().returns();
 
-    sinon.stub(productsService, 'getProductById').resolves(200); // para
+    sinon.stub(productsService, 'getProductById').resolves(produto); 
 
     await productsController.getProductById(request, response);
 
-    expect(response.status).to.be.equal(200);
-    expect(response.json).to.have.been.calledWith(mockIdProducts);
+    expect(response.status).to.have.been.calledWith(200);
+    expect(response.json).to.have.been.calledWith(produto);
   });
 
 });

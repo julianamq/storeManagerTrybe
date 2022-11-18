@@ -24,12 +24,13 @@ describe('Products search test Models', function () {
    
   });
   it('Chamando por id.', async function () {
-    const product = { id: 1, name: 'Test' };
+    const product = {
+      "id": 1,
+      "name": "Martelo de Thor"
+    };
     sinon.stub(connection, 'execute').resolves([mockProducts]);
-    sinon.stub(productsModel, 'getProductById').resolves(mockProducts);
-
     const result = await productsService.getProductById(product);
-    expect(result).to.been.have.calledWith(200);
+    expect(result).to.be.deep.equal(product);
   });
 
 });
