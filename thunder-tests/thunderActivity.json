@@ -4,11 +4,11 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/products/15",
+    "url": "http://localhost:3000/products/mesa",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-11-16T17:40:10.541Z",
-    "modified": "2022-11-18T16:44:12.522Z",
+    "modified": "2022-11-18T19:38:30.489Z",
     "headers": [],
     "params": [],
     "tests": []

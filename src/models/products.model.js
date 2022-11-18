@@ -14,11 +14,16 @@ const getProductById = async (id) => {
   return result;
 };
 
-// const productsRouter = async () => {
-  
-// };
+const registerProducts = async (index) => {
+  const [{ resultId }] = await connection.execute(
+    'INSERT INTO StoreManager.products (name) VALUES (?)',
+    [index],
+  );
+  return resultId;
+};
 
 module.exports = {
   getProducts,
   getProductById,
+  registerProducts,
 };

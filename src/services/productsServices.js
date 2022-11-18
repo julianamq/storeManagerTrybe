@@ -11,6 +11,7 @@ const getProductById = async (id) => {
   }
   return product;
 };
+// no service tenho que chamar pelo novo produto , ter uma validação 
 
 module.exports = {
   getProducts,
