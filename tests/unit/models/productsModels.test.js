@@ -10,13 +10,13 @@ const productsModel = require('./../../../src/models/products.model')
 const { expect } = chai;
 chai.use(sinonChai);
 
-describe('Products search test', function () {
+describe('Products search test Models', function () {
   beforeEach(() => {
     sinon.restore();
   });
 
   it('Busca de produtos', async function () {
-    sinon.stub(connection, 'execute').resolves([[mockProducts]]);
+    sinon.stub(connection, 'execute').resolves([mockProducts]);
 
     const buscaProduto = await productsModel.getProducts();
 
@@ -29,10 +29,9 @@ describe('Products search test', function () {
     sinon.stub(productsModel, 'getProductById').resolves(mockProducts);
 
     const result = await productsService.getProductById(product);
-console.log(result, 'log')
     expect(result).to.been.have.calledWith(200);
   });
-  // afterEach(sinon.restore);
+
 });
 
 

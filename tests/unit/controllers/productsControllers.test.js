@@ -30,7 +30,7 @@ describe('Controller test', function () {
     expect(response.json).to.have.been.calledWith(mockProducts);
 
   });
-  it('Se o produto é retornado pelo id ', async function () {
+  it('Se o produto é retornado pelo id mensagem 404 ', async function () {
     const response = {};
     const request = { params: { id: '22' } };
     const mock404 = { message: 'Product not found' }
@@ -52,7 +52,7 @@ describe('Controller test', function () {
 
     expect(result).to.be.deep.equal(mockProducts);
   });
-  it('Chamando por id.', async function () {
+  it('Chamando por id mensagem 200', async function () {
     const response = {};
     const request = { params: { id: '22' } };
     
@@ -64,8 +64,8 @@ describe('Controller test', function () {
 
     await productsController.getProductById(request, response);
 
-    expect(response.status).to.have.been.calledWith(200);
-    expect(response.json).to.have.been.calledWith(mockProducts);
+    expect(response.status).to.be.equal(200);
+    expect(response.json).to.have.been.calledWith(mockIdProducts);
   });
 
 });
