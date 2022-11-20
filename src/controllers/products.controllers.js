@@ -19,13 +19,12 @@ const getProductById = async (request, response) => {
 };
 
 const registerProducts = async (request, response) => {
-  const product = await productsService.getProductById(request.params.name);
-
-   if (product.message) {
-     return response.status(HTTP_404).json(product);
-  }
-  return response.status(HTTP_201).json(product);
-};
+  const { name } = request.body;
+  const product = await productsService.registerProduct(name);
+  console.log(product);
+  if (product.type) return response.status(422).json(product.message);
+  return response.status(HTTP_201).json(product.message);
+  };
 module.exports = {
   getProducts,
   getProductById,

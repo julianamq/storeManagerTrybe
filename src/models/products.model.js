@@ -3,7 +3,7 @@ const connection = require('./connection');
 
 const getProducts = async () => {
   const [result] = await connection.execute('SELECT * FROM products;');
-  return result;
+   return result;
 };
 
 // criar uma nova função que vai  buscar o produto pelo ID, model só vou buscar, recebe o id por parametro
@@ -11,15 +11,17 @@ const getProducts = async () => {
 const getProductById = async (id) => {
   const [[result]] = await connection
     .execute('SELECT * FROM StoreManager.products WHERE id = ? ;', [id]);
+ 
   return result;
 };
 
 const registerProducts = async (index) => {
-  const [{ resultId }] = await connection.execute(
+  const [{ insertId }] = await connection.execute(
     'INSERT INTO StoreManager.products (name) VALUES (?)',
     [index],
   );
-  return resultId;
+  // console.log(insertId);
+  return insertId;
 };
 
 module.exports = {
