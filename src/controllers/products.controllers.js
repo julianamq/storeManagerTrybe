@@ -3,7 +3,6 @@ const productsService = require('../services/productsServices');
 
 const STATUS_OK = 200;
 const HTTP_404 = 404;
-const HTTP_201 = 201;
 
 const getProducts = async (request, response) => {
   const products = await productsService.getProducts();
@@ -21,9 +20,9 @@ const getProductById = async (request, response) => {
 const registerProducts = async (request, response) => {
   const { name } = request.body;
   const product = await productsService.registerProduct(name);
-  console.log(product);
+  console.log(product, 'services');
   if (product.type) return response.status(422).json(product.message);
-  return response.status(HTTP_201).json(product.message);
+  return response.status(201).json(product.message);
   };
 module.exports = {
   getProducts,

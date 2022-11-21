@@ -1,7 +1,19 @@
 const Joi = require('joi');
 
-const validateJoi = Joi.string().min(5).required();
+const validateName = Joi.string().min(5).required();
+
+const validateId = Joi.number().integer().min(1).required();
+
+const validationIndId = (id) => {
+  const { error } = validateId.validate(id);
+  if (error) {
+    return { type: 'PRODUCT_NOT_FOUND', message: 'Wrong id format' };
+  }
+  return { type: null, message: '' };
+};
 
 module.exports = {
-  validateJoi,
+  validateName,
+  validateId,
+  validationIndId,
 };
