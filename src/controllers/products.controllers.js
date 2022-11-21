@@ -20,9 +20,9 @@ const getProductById = async (request, response) => {
 const registerProducts = async (request, response) => {
   const { name } = request.body;
   const product = await productsService.registerProduct(name);
-  console.log(product, 'services');
+  console.log(product, 'controller');// também está imprimindo o { id: 9, name: 'Produto1' }
   if (product.type) return response.status(422).json(product.message);
-  return response.status(201).json(product.message);
+  return response.status(201).json(product);
   };
 module.exports = {
   getProducts,

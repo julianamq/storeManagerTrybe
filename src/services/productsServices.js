@@ -18,8 +18,9 @@ const registerProduct = async (createProductNew) => {
 
   if (validateProducts) return validateProducts;
   const products = await productsModels.registerProducts(createProductNew);
-  console.log(products); // aqui tá imprimindo 6,7,8 
+// aqui tá imprimindo 6,7,8 
   const newProductsCreated = await productsModels.getProductById(products);
+  // console.log(newProductsCreated, 'new');
   return newProductsCreated;
 };
 module.exports = {
