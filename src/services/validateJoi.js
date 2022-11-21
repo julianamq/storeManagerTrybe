@@ -1,7 +1,6 @@
 const Joi = require('joi');
 
 const validateName = Joi.string().min(5).required();
-
 const validateId = Joi.number().integer().min(1).required();
 
 const validationIndId = (id) => {

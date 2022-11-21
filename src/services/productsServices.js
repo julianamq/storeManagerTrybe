@@ -1,5 +1,5 @@
 const productsModels = require('../models/products.model');
-const { validateNameCaracteres } = require('./validateRequest');
+const validateNameCaracteres = require('./validateRequest');
 
 const getProducts = async () => {
   const products = await productsModels.getProducts();
@@ -7,13 +7,15 @@ const getProducts = async () => {
 };
 const getProductById = async (id) => {
   const product = await productsModels.getProductById(id);
+  console.log(product);
   if (!product) {
     return { message: 'Product not found' };
   }
   return product;
 };
 // no service tenho que chamar pelo novo produto , ter uma validação 
-const registerProduct = async (createProductNew) => {
+
+  const registerProduct = async (createProductNew) => {
   const validateProducts = validateNameCaracteres(createProductNew);
 
   if (validateProducts) return validateProducts;

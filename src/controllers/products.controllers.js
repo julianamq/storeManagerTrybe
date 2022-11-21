@@ -11,8 +11,8 @@ const getProducts = async (request, response) => {
 
 const getProductById = async (request, response) => {
   const product = await productsService.getProductById(request.params.id);
-  if (product.message) {
-    return response.status(HTTP_404).json(product);
+  if (!product) {
+    return response.status(HTTP_404).json({ message: 'Product not found' });
   }
   return response.status(STATUS_OK).json(product);
 };
@@ -20,10 +20,11 @@ const getProductById = async (request, response) => {
 const registerProducts = async (request, response) => {
   const { name } = request.body;
   const product = await productsService.registerProduct(name);
-  console.log(product, 'controller');// também está imprimindo o { id: 9, name: 'Produto1' }
-  if (product.type) return response.status(422).json(product.message);
-  return response.status(201).json(product);
-  };
+ // (Rubens)
+  // console.log(product, 'controller');// também está imprimindo o { id: 9, name: 'Produto1' }
+  if (product.type) return response.status(422).json({ message: product.message }); //  a chaves é para tornar objeto
+   return response.status(201).json(product);
+};
 module.exports = {
   getProducts,
   getProductById,
