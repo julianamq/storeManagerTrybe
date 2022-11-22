@@ -7,11 +7,8 @@ const getProducts = async () => {
 };
 const getProductById = async (id) => {
   const product = await productsModels.getProductById(id);
-  console.log(product);
-  if (!product) {
-    return { message: 'Product not found' };
-  }
-  return product;
+  console.log(product, 'product service');
+   return product;
 };
 // no service tenho que chamar pelo novo produto , ter uma validação 
 

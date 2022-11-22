@@ -5,10 +5,9 @@ const validationsName = require('../middlewares/validationName');
 
 const router = express.Router(); 
 
+router.get('/:id', productsController.getProductById);
 router.get('/', productsController.getProducts);
 
 router.post('/', validationsName, productsController.registerProducts);
-
-router.get('/:id', productsController.getProductById);
 
 module.exports = router;
