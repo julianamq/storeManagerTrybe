@@ -4,9 +4,9 @@ const checkQuantityOfSales = (request, response, next) => {
   const sales = request.body;
   // console.log(sales);
   const validationQuantity = sales.map((sale) => sale.quantity);
-  console.log(validationQuantity, 'quantidade validação d vendas');
+  // console.log(validationQuantity, 'quantidade validação d vendas');
   const verificationQuantity = validationQuantity.some((q) => q === undefined);
-  console.log(verificationQuantity, 'quantidade');
+  // console.log(verificationQuantity, 'quantidade');
   if (verificationQuantity) {
     return response.status(400).json({ message: '"quantity" is required' });
   }
@@ -20,9 +20,9 @@ const checkQuantityOfSales = (request, response, next) => {
 const validationProductValiation = (request, response, next) => {
   const sales = request.body;
   const productIdValidation = sales.map((sale) => sale.productId);
-  console.log(productIdValidation, 'validação de produto');
+  // console.log(productIdValidation, 'validação de produto');
   const verificationProduct = productIdValidation.some((q) => q === undefined);
-  console.log(verificationProduct, 'validation produto und');
+  // console.log(verificationProduct, 'validation produto und');
   if (verificationProduct) {
     return response.status(400).json({ message: '"productId" is required' });
   }

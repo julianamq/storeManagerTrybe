@@ -41,7 +41,7 @@ describe('Controller test', function () {
     sinon.stub(productsService, 'getProductById').resolves(mock404); // para
 
     await productsController.getProductById(request, response);
-   
+
     expect(response.status).to.have.been.calledWith(404);
     expect(response.json).to.have.been.calledWith(mock404);
   });
@@ -59,11 +59,11 @@ describe('Controller test', function () {
       "id": 1,
       "name": "Martelo de Thor"
     }
-    
+
     response.status = sinon.stub().returns(response);
     response.json = sinon.stub().returns();
 
-    sinon.stub(productsService, 'getProductById').resolves(produto); 
+    sinon.stub(productsService, 'getProductById').resolves(produto);
 
     await productsController.getProductById(request, response);
 

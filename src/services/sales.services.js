@@ -17,12 +17,24 @@ const create = async (sales) => {
   );
   return { id: saleId, items: sales };
 };
+const getAllSales = async () => {
+  const sales = await salesModel.getAllSales();
+  return sales;
+};
 const deleteId = async (id) => {
   const products = await salesModel.deleteProduct(id);
   if (!products) return { type: 'error', message: 'Sale not found' };
   return { type: null };
 };
+
+const getSalesById = async (id) => {
+  const salesId = await salesModel.getSalesById(id);
+  return salesId;
+};
+
 module.exports = {
+  getAllSales,
+  getSalesById,
   create,
   deleteId,
-};
+ };
