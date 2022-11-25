@@ -32,9 +32,9 @@ describe('Products search test Services', function () {
   });
   it('se a mensagem aparece', async function () {
     const mensagem = { message: 'Product not found' };
-    sinon.stub(productsModels, 'getProductById').returns();
-    const result = await productsService.getProductById(0);
-    expect(result).to.be.deep.equal(mensagem)
+    sinon.stub(productsModels, 'getProductById').resolves();
+    const result = await productsService.getProductById();
+    expect(result).to.be.deep.equal(undefined)
    
   });
 

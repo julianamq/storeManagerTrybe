@@ -20,7 +20,7 @@ const deleteProduct = async (request, response) => {
 };
 const getAllSales = async (_request, response) => {
   const message = await salesService.getAllSales();
-  console.log(message, 'mensagem');
+  // console.log(message, 'mensagem');
   response.status(200).json(message);
 };
 

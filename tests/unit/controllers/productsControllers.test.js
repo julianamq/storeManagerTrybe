@@ -38,7 +38,7 @@ describe('Controller test', function () {
     response.status = sinon.stub().returns(response);
     response.json = sinon.stub().returns();
 
-    sinon.stub(productsService, 'getProductById').resolves(mock404); // para
+    sinon.stub(productsService, 'getProductById').resolves(undefined); // para
 
     await productsController.getProductById(request, response);
 
@@ -70,5 +70,44 @@ describe('Controller test', function () {
     expect(response.status).to.have.been.calledWith(200);
     expect(response.json).to.have.been.calledWith(produto);
   });
+  it('Se todos os produtos são registrados', async function () {
+    const response = {};
+    const request = {
+      body: {
+        "id": 1,
+        "name": "Martelo de Thor"
+      }
+    };
+    const produto = {
+      "id": 1,
+      "name": "Martelo de Thor"
+    }
+    response.status = sinon.stub().returns(response);
+    response.json = sinon.stub().returns();
 
+    sinon.stub(productsService, 'registerProduct').resolves(produto);
+    
+    await productsController.registerProducts(request, response);
+
+    expect(response.status).to.have.been.calledWith(201);
+    expect(response.json).to.have.been.calledWith(produto);
+  });
+  it('Se os produtos não são registrados', async function () {
+    const response = {};
+    const request = {
+      body: {
+       "name": "Martelo de Thor"
+      }
+}; 
+    const xablau = { message: 'Não definido' };
+    response.status = sinon.stub().returns(response);
+    response.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'registerProduct').resolves({ type: 'error', message: 'Não definido' });
+// resolves é o retorno da função 
+    await productsController.registerProducts(request, response);
+
+    expect(response.status).to.have.been.calledWith(422);
+    expect(response.json).to.have.been.calledWith(xablau);
+  })
 });

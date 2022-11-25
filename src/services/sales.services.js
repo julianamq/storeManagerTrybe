@@ -1,6 +1,6 @@
 // validação do banco do dados
 const salesModel = require('../models/salesModel');
-const validateSalesId = require('./validateSales');
+const validateSalesId = require('./salesValidate');
 // chamar o validateSalesId 
 const create = async (sales) => {
   const salesIsValid = await validateSalesId(sales);

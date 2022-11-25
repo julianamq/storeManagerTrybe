@@ -19,7 +19,11 @@ const registerProducts = async (request, response) => {
   const product = await productsService.registerProduct(name);
  // (Rubens) 
   // console.log(product, 'controller');// também está imprimindo o { id: 9, name: 'Produto1' }
-  if (product.type) return response.status(422).json({ message: product.message }); //  a chaves é para tornar objeto
+  if (product.type) {
+ return response.status(422).json({
+    message: product.message,
+  }); 
+} //  a chaves é para tornar objeto
    return response.status(201).json(product);
 };
 module.exports = {
