@@ -2,7 +2,7 @@ const salesService = require('../services/sales.services');
 
 const createSales = async (request, response) => {
   const sales = request.body;
-  // console.log(sales);
+  // console.log(sales, 'sales controller');
   const { id, type, message } = await salesService.create(sales);
   // console.log(id);
   if (type) {

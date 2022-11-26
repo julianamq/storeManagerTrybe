@@ -26,8 +26,30 @@ const registerProducts = async (request, response) => {
 } //  a chaves é para tornar objeto
    return response.status(201).json(product);
 };
+
+const updateProduct = async (request, response) => {
+  const { id } = request.params;
+  const { name } = request.body;
+  const lengthName = name.length;
+  // checar o nome antes ajuda a não armazenar informações desnecessárias. * Rubens
+  if (lengthName < 5) {
+    return response.status(422)
+    .json({ message: '"name" length must be at least 5 characters long' });
+  }
+  // destruturação
+  const message = await productsService.updateProduct(id, name);
+  // console.log(message, 'mensagem update'); // tem que usar o id ***
+
+  if (!message) {
+    return response.status(404).json({ message: 'Product not found' });
+  }
+  if (message) {
+    return response.status(200).json({ id, name });
+  }
+};
 module.exports = {
   getProducts,
   getProductById,
   registerProducts,
+  updateProduct,
 };
