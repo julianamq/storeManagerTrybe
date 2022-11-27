@@ -96,18 +96,21 @@ describe('Controller test', function () {
     const response = {};
     const request = {
       body: {
-       "name": "Martelo de Thor"
+        "name": "Martelo de Thor"
       }
-}; 
+    };
     const xablau = { message: 'Não definido' };
     response.status = sinon.stub().returns(response);
     response.json = sinon.stub().returns();
 
     sinon.stub(productsService, 'registerProduct').resolves({ type: 'error', message: 'Não definido' });
-// resolves é o retorno da função 
+    // resolves é o retorno da função 
     await productsController.registerProducts(request, response);
 
     expect(response.status).to.have.been.calledWith(422);
     expect(response.json).to.have.been.calledWith(xablau);
+  });
+  it('update', function () {
+    
   })
 });
