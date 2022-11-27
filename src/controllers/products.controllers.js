@@ -38,14 +38,12 @@ const updateProduct = async (request, response) => {
   }
   // destruturação
   const message = await productsService.updateProduct(id, name);
-  // console.log(message, 'mensagem update'); // tem que usar o id ***
-
-  if (!message) {
+  console.log(message, 'mensagem update'); // tem que usar o id ***
+ // erro !message ela nunca vai estar vazia. Por isso usar o message.type
+  if (message.type) {
     return response.status(404).json({ message: 'Product not found' });
   }
-  if (message) {
-    return response.status(200).json({ id, name });
-  }
+  return response.status(200).json({ id, name });
 };
 module.exports = {
   getProducts,

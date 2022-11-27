@@ -25,26 +25,17 @@ const registerProduct = async (createProductNew) => {
 };
 
 const updateProduct = async (id, name) => {
-  const { type, message } = await validationIndId(); 
-  console.log(type, 'type');
-  console.log(message, 'message');
+  const { type, message } = await validationIndId(id); 
   if (type) return { type, message };
   const products = await productsModels.updateProduct(id, name);
- 
-  if (products < 1) return { type: 'error', message: 'Product not found' };
-  console.log(products);
+  
+  if (products.affectedRows === 0) return { type: 'error', message: 'Product not found' };
+  // console.log('passou do affected');
   const updatedProducts = await productsModels.getProductById(id);
-  console.log(updatedProducts);
+  // console.log(updatedProducts, 'update');
   return { type: null, message: updatedProducts };
 };
-// const updateProduct = async (id, name) => {
-//   const getId = await validateNameCaracteres(name);
-//   console.log(getId, ' get id update');
-//   if (getId) return getId;   
-//   const updatedProducts = await productsModels.getProductById(id);
-//   return { type: null, message: updatedProducts };
-// };
-// console.log(validateProducts, 'validate service');
+
 module.exports = {
   getProducts,
   getProductById,

@@ -6,7 +6,7 @@ const validateId = Joi.number().integer().min(1).required();
 const validationIndId = (id) => {
   const { error } = validateId.validate(id);
   if (error) {
-    return { type: 'PRODUCT_NOT_FOUND', message: 'Wrong id format' };
+    return { type: 404, message: 'Wrong id format' };
   }
   return { type: null, message: '' };
 };
