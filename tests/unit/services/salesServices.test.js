@@ -4,7 +4,7 @@ const sinonChai = require('sinon-chai');
 const connection = require('../../../src/models/connection');
 const salesServices = require('./../../../src/services/sales.services')
 const salesModel = require('./../../../src/models/salesModel');
-const productsModels = require('../../../src/services/salesValidate')
+const mockSales = require('../mocks/mocksales')
 const { expect } = chai;
 chai.use(sinonChai);
 
@@ -12,64 +12,23 @@ describe('Products search test  Sales Services ', function () {
   beforeEach(() => {
     sinon.restore();
   });
-  const salesById = [
-    {
-      "date": "2022-11-28T12:03:57.000Z",
-      "productId": 1,
-      "quantity": 5
-    },
-    {
-      "date": "2022-11-28T12:03:57.000Z",
-      "productId": 2,
-      "quantity": 10
-    }
-  ]
-  const mockSales = [
-    {
-      "saleId": 1,
-      "productId": 1,
-      "quantity": 5,
-      "date": "2022-11-28T12:03:57.000Z"
-    },
-    {
-      "saleId": 1,
-      "productId": 2,
-      "quantity": 10,
-      "date": "2022-11-28T12:03:57.000Z"
-    },
-    {
-      "saleId": 2,
-      "productId": 3,
-      "quantity": 15,
-      "date": "2022-11-28T12:03:57.000Z"
-    }
-  ];
-  const novaVenda = [
-    {
-      "productId": 1,
-      "quantity": 1
-    },
-    {
-      "productId": 2,
-      "quantity": 5
-    }
-  ];
+
   it('Testa adicionar nova venda em sales', async function () {
 
-    sinon.stub(salesModel, 'getAllSales').resolves(mockSales);
+    sinon.stub(salesModel, 'createSales').resolves(mockSales.novaVenda);
 
 
-    const result = await salesServices.create( [
-      {
-        "productId": 1,
-        "quantity": 1
-      },
-      {
-        "productId": 2,
-        "quantity": 5
-      }
-    ]);
+    const result = await salesServices.create(mockSales.novaVenda);
 
-    expect(result).to.be.equal(mockSales)
+    expect(result).to.be.equal(mockSales.retornoVenda)
+  });
+  it('Testa se é possivel buscar por todas as vendas', async function () {
+
+    sinon.stub(salesModel, 'getAllSales').resolves(mockSales.allSales);
+
+
+    const result = await salesServices.getAllSales(mockSales.allSales);
+
+    expect(result).to.be.equal(mockSales.allSales)
   });
 });

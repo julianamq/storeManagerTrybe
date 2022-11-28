@@ -15,17 +15,17 @@ const create = async (sales) => {
       );
     }),
   );
-  console.log({ id: saleId, items: sales });
+  // console.log({ id: saleId, items: sales }, 'console create');
   return { id: saleId, items: sales };
 };
 const getAllSales = async () => {
   const sales = await salesModel.getAllSales();
-  console.log(sales, 'sale');
+  // console.log(sales, 'sale');
   return sales;
 };
 const deleteSales = async (id) => {
   const products = await salesModel.deleteSales(id);
-  console.log(products, 'log delete');
+
   if (!products) return { type: 'error', message: 'Sale not found' };
   return { type: null };
 };
