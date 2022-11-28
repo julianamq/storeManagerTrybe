@@ -10,9 +10,10 @@ const createSales = async (request, response) => {
   }
   return response.status(201).json({ id, itemsSold: sales });
 };
-const deleteProduct = async (request, response) => {
+const deleteSales = async (request, response) => {
   const { id } = request.params;
-  const { type, message } = await salesService.deleteProduct(id);
+  const { type, message } = await salesService.deleteSales(id);
+  console.log(type, message, 'type e message');
   if (type) {
     return response.status(404).json({ message: 'Sale not found' });
   }
@@ -37,7 +38,7 @@ module.exports = {
   getAllSales,
   getSalesById,
   createSales,
-  deleteProduct,
+  deleteSales,
 };
 
 // seis com ajuda graças a Deus e ao Rubens!!

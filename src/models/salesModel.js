@@ -44,7 +44,7 @@ const getSalesById = async (id) => {
   return result;
 };
 
-const deleteProduct = async (id) => {
+const deleteSales = async (id) => {
   const [{ affectedRows }] = await connection.execute(
     'DELETE FROM StoreManager.products WHERE id = ?',
     [id],
@@ -57,7 +57,7 @@ module.exports = {
   createSales,
   createRegister,
   validateIds,
-  deleteProduct,
+  deleteSales,
 };
 // criar 
 // validar 

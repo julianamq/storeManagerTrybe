@@ -48,7 +48,7 @@ const updateProduct = async (request, response) => {
 const deleteProduct = async (request, response) => {
   const { id } = request.params;
   const message = await productsService.deleteProduct(id);
-  console.log(message);
+
   if (message.type) {
     return response.status(404).json({ message: 'Product not found' });
   }
