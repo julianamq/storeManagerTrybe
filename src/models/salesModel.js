@@ -13,13 +13,6 @@ const createRegister = async (saleId, productId, quantity) => {
     [saleId, productId, quantity],
   );
 };
-const deleteProduct = async (id) => {
-  const [{ affectedRows }] = await connection.execute(
-    'DELETE FROM StoreManager.products WHERE id = ?',
-    [id],
-  );
-  return affectedRows;
-};
 
 const validateIds = async () => {
   const [getValidIds] = await connection.execute(
@@ -49,6 +42,14 @@ const getSalesById = async (id) => {
     [id],
   );
   return result;
+};
+
+const deleteProduct = async (id) => {
+  const [{ affectedRows }] = await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = ?',
+    [id],
+  );
+  return affectedRows;
 };
 module.exports = {
   getAllSales,

@@ -54,20 +54,35 @@ describe('Controller test', function () {
     expect(response.json).to.have.been.calledWith(mockSales);
 
   });
-  it('Testar se é retornado a mensagem', async function () {
+  it('Testar se é retornado a mensagem 404', async function () {
+  
     const response = {};
-    const request = {};
-    const message = {message:'Sale not found'};
+    const request = { params: { id: '22' } }; // esta faltando colcoar algo em params
     response.status = sinon.stub().returns(response);
     response.json = sinon.stub().returns();
 
-    sinon.stub(salesService, 'create').resolves({ type: null, message: 'Sale not found' });
-    // para retornar promisse
+    sinon.stub(salesController.createSales, 'create').resolves({  message: 'Sale not found' }); // para
 
     await salesController.createSales(request, response);
 
     expect(response.status).to.have.been.calledWith(404);
-    expect(response.json).to.have.been.calledWith(message);
+    expect(response.json).to.have.been.calledWith({ message: 'Sale not found' });
+
+  });
+  it('Testar se é deletada as vendas', async function () {
+
+    const response = {};
+    const request = { params: { id: '22' } }; // esta faltando colcoar algo em params
+  
+    response.status = sinon.stub().returns(response);
+    response.json = sinon.stub().returns();
+
+    sinon.stub(salesController.deleteProduct, 'deleteProduct').resolves(mockSales); // para
+
+    await salesController.deleteProduct(request, response);
+
+    expect(response.status).to.have.been.calledWith(404);
+    expect(response.json).not.to.have.been.calledWith(mockSales);
 
   });
 });
