@@ -91,11 +91,13 @@ describe('Controller test', function () {
 
     response.status = sinon.stub().returns(response);
     response.json = sinon.stub().returns();
-    sinon.stub(salesService, 'deleteSales').resolves({  message: 'Sale not found' });
+    sinon.stub(salesService, 'deleteSales').resolves({
+      message: 'Sale not found'
+    });
     await salesController.deleteSales(request, response);
 
     expect(response.status).to.have.been.calledWith(204);
-    expect(response.json).to.have.been.calledWith({ message: 'Sale not found' });
+    expect(response.json).to.have.been.calledWith( 'Sale not found');
 
   });
   it('Testar se dá para pegar pelo id', async function () {

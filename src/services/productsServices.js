@@ -14,8 +14,8 @@ const getProductById = async (id) => {
 // no service tenho que chamar pelo novo produto , ter uma validação 
 
 const registerProduct = async (createProductNew) => {
-  const validateProducts = validateNameCaracteres(createProductNew);
-
+  const validateProducts = validateNameCaracteres.validateNameCaracteres(createProductNew);
+  console.log(validateProducts, 'log validate ');
   if (validateProducts) return validateProducts;
   const products = await productsModels.registerProducts(createProductNew);
   // aqui tá imprimindo 6,7,8 
@@ -28,7 +28,6 @@ const updateProduct = async (id, name) => {
   const { type, message } = await validationIndId(id); 
   if (type) return { type, message };
   const products = await productsModels.updateProduct(id, name);
-  
   if (products.affectedRows === 0) return { type: 'error', message: 'Product not found' };
   // console.log('passou do affected');
   const updatedProducts = await productsModels.getProductById(id);
@@ -37,7 +36,7 @@ const updateProduct = async (id, name) => {
 };
 const deleteProduct = async (id) => {
   const products = await productsModels.deleteProduct(id);
-  console.log(products, 'produto delete');
+  // console.log(products, 'produto delete');
   if (products < 1) return { type: 'error', message: 'Product not found' };
   return { type: null };
 };

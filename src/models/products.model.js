@@ -15,12 +15,12 @@ const getProductById = async (id) => {
   return result;
 };
 
-const registerProducts = async (index) => {
+const registerProducts = async (nome) => {
   const [{ insertId }] = await connection.execute(
     'INSERT INTO StoreManager.products (name) VALUES (?)',
-    [index],
+    [nome],
   );
-  // console.log(insertId);
+  // console.log(insertId, 'insert id');
   return insertId;
 };
 const updateProduct = async (id, name) => {
@@ -28,6 +28,7 @@ const updateProduct = async (id, name) => {
     'UPDATE StoreManager.products SET name = ? WHERE id = ?',
     [name, id],
   );
+  // console.log(result);
   return result;
 };
 const deleteProduct = async (id) => {

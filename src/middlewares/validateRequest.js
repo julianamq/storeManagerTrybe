@@ -7,4 +7,4 @@ const validateNameCaracteres = (name) => {
      // type add para que ela exista alguma coisa ( 0, '' string vazia e null e undefined ele considera como false)
   }
 };
-module.exports = validateNameCaracteres;
+module.exports = { validateNameCaracteres };

@@ -12,14 +12,15 @@ const createRegister = async (saleId, productId, quantity) => {
     'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES(?, ?, ?)',
     [saleId, productId, quantity],
   );
+  return null;
 };
 
 const validateIds = async () => {
   const [getValidIds] = await connection.execute(
     'SELECT id FROM StoreManager.products',
   );
-
   const arrayValid = getValidIds.map((item) => item.id);
+  console.log(arrayValid, 'array valido');
   return arrayValid;
 };
 const getAllSales = async () => {
@@ -29,6 +30,7 @@ const getAllSales = async () => {
     INNER JOIN StoreManager.sales AS ss ON ss.id = ss_p.sale_id
     ORDER BY ss.id, productId;`,
   );
+
   return result;
 };
 
@@ -59,6 +61,6 @@ module.exports = {
   validateIds,
   deleteSales,
 };
-// criar 
+// criar
 // validar 
 // registrar
