@@ -1,5 +1,5 @@
 const productsModels = require('../models/products.model');
-const { validateNameCaracteres } = require('../middlewares/validateRequest');
+const validateNameCaracteres = require('../middlewares/validateRequest');
 const { validationIndId } = require('../middlewares/validateJoi');
 
 const getProducts = async () => {

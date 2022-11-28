@@ -14,7 +14,7 @@ describe('Controller test', function () {
   beforeEach(() => {
     sinon.restore();
   });
-
+  
   it('Busca de produtos com a porta Controller getProducts', async function () {
     // sinon.stub(productsController).resolves([mockProducts]);
     // isso é o mock    
@@ -110,7 +110,61 @@ describe('Controller test', function () {
     expect(response.status).to.have.been.calledWith(422);
     expect(response.json).to.have.been.calledWith(xablau);
   });
-  it('update', function () {
-    
+  it('update incorreto ',async function () {
+    const response = {}
+    const request = {
+      params: { "id": 1 },
+      body: {
+        "name": "Martelo de Thor"
+      }
+    };
+    response.status = sinon.stub().returns(response);
+    response.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'updateProduct').resolves({ type: 'error', message: 'Product not found' });
+
+    await productsController.updateProduct(request, response);
+    expect(response.status).to.have.been.calledWith(404);
+    expect(response.json).to.have.been.calledWith({ message: 'Product not found' });
+
+  })
+  it('update msg 200', async function () {
+    const response = {}
+    const request = {
+      params: { "id": 1 },
+      body: {
+        "name": "Martelo do Batman"
+      }
+    };
+    const resposta = {
+      "id": 1,
+      "name": "Martelo do Batman"
+    }
+    response.status = sinon.stub().returns(response);
+    response.json = sinon.stub().returns();
+    sinon.stub(productsService, 'updateProduct').resolves(resposta)
+    await productsController.updateProduct(request, response);
+    expect(response.status).to.have.been.calledWith(200)
+    expect(response.json).to.have.been.calledWith(resposta)
+  
+  })
+  it('update se o nome for menor que 5', async function () {
+    const response = {}
+    const request = {
+      params: { "id": 1 },
+      body: {
+        "name": "Mart"
+      }
+    };
+  
+    response.status = sinon.stub().returns(response);
+    response.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'updateProduct').resolves({ message: '"name" length must be at least 5 characters long' })
+
+    await productsController.updateProduct(request, response);
+    expect(response.status).to.have.been.calledWith(422)
+    expect(response.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' })
+
   })
 });
